@@ -4,7 +4,9 @@ import "./global.scss";
 interface IProps {
   title: string;
   text: string;
-  description?: string;
+  num: number;
+  currOpen: number | null;
+  onOpen: (val: null | number) => void;
 }
 
 const data = [
@@ -40,24 +42,40 @@ function App() {
 }
 
 function Card() {
+  const [currOpen, setCurrOpen] = useState<null | number>(null);
+  //* currOpen is the value of num
   return (
     <div className="card">
       <h1>
         <img src="images/icon-star.svg" alt="icon star" />
         FAQs
       </h1>
-      {data.map((ele) => {
-        return <Item title={ele.title} text={ele.text} key={ele.title} />;
+      {data.map((ele, i) => {
+        return (
+          <Item
+            title={ele.title}
+            text={ele.text}
+            num={i + 1}
+            currOpen={currOpen}
+            onOpen={setCurrOpen}
+            key={ele.title}
+          />
+        );
       })}
     </div>
   );
 }
 
-function Item({ title, text }: IProps) {
-  const [isOpen, setIsOpen] = useState(false);
+function Item({ num, title, text, currOpen, onOpen }: IProps) {
+  // const [isOpen, setIsOpen] = useState(false);
+  const isOpen = currOpen === num;
+  // if currentOpen equals value of num (index) then set {isOpen} to truthy value
 
   function handleToggle() {
-    return setIsOpen((isOpen) => !isOpen);
+    return onOpen(isOpen ? null : num);
+    /* 
+      check if value of isOpen true then on click let {currOpen} equals to null => to activate (-) button other wise set {currOpen} to be value of num
+     */
   }
 
   return (
