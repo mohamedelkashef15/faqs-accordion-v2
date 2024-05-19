@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+$light-pink: hsl(275, 100%, 97%);
+$grayish-purple: hsl(292, 16%, 49%);
+$dark-purple: hsl(292, 42%, 14%);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  background-color: $light-pink;
+}
+
+h1,
+h2 {
+  color: $dark-purple;
+}
+
+p {
+  line-height: 1.6;
+}
+
+#accordion {
+  background: url("images/background-pattern-desktop.svg") center center/cover no-repeat;
+  height: 30vh;
+
+  .container {
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 600px;
+  h1 {
+    font-size: 50px;
+    margin-bottom: 35px;
+    img {
+      margin-right: 20px;
+    }
+  }
+}
+
+.items {
+  .item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    position: relative;
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    p {
+      color: $grayish-purple;
+      font-weight: 400;
+      font-size: 16px;
+    }
+    .icon {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.items:not(:last-child) {
+  border-bottom: 1px solid $light-pink;
+}
