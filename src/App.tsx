@@ -1,12 +1,10 @@
 import { useState } from "react";
 import "./global.scss";
 
-interface IProps {
+interface IItems {
   title: string;
   text: string;
   num: number;
-  currOpen: number | null;
-  onOpen: (val: null | number) => void;
 }
 
 const data = [
@@ -42,8 +40,6 @@ function App() {
 }
 
 function Card() {
-  const [currOpen, setCurrOpen] = useState<null | number>(null);
-  //* currOpen is the value of num
   return (
     <div className="card">
       <h1>
@@ -51,28 +47,21 @@ function Card() {
         FAQs
       </h1>
       {data.map((ele, i) => {
-        return (
-          <Item
-            title={ele.title}
-            text={ele.text}
-            num={i + 1}
-            currOpen={currOpen}
-            onOpen={setCurrOpen}
-            key={ele.title}
-          />
-        );
+        return <Item title={ele.title} text={ele.text} num={i + 1} key={ele.title} />;
       })}
     </div>
   );
 }
 
-function Item({ num, title, text, currOpen, onOpen }: IProps) {
+function Item({ num, title, text }: IItems) {
+  const [currOpen, setCurrOpen] = useState<null | number>(null);
   // const [isOpen, setIsOpen] = useState(false);
   const isOpen = currOpen === num;
+  // 1 == 1
   // if currentOpen equals value of num (index) then set {isOpen} to truthy value
 
   function handleToggle() {
-    return onOpen(isOpen ? null : num);
+    return setCurrOpen(isOpen ? null : num);
     /* 
       check if value of isOpen true then on click let {currOpen} equals to null => to activate (-) button other wise set {currOpen} to be value of num
      */
